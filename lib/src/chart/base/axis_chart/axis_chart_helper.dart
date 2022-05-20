@@ -26,7 +26,8 @@ class AxisChartHelper {
     required double baseLine,
     required double interval,
   }) sync* {
-    final initialValue = Utils().getBestInitialIntervalValue(min, max, interval, baseline: baseLine);
+    final initialValue = Utils()
+        .getBestInitialIntervalValue(min, max, interval, baseline: baseLine);
     var axisSeek = initialValue;
     final firstPositionOverlapsWithMin = axisSeek == min;
     if (!minIncluded && firstPositionOverlapsWithMin) {
@@ -36,7 +37,8 @@ class AxisChartHelper {
     final count = diff ~/ interval;
     final lastPosition = initialValue + (count * interval);
     final lastPositionOverlapsWithMax = lastPosition == max;
-    final end = !maxIncluded && lastPositionOverlapsWithMax ? max - interval : max;
+    final end =
+        !maxIncluded && lastPositionOverlapsWithMax ? max - interval : max;
 
     final epsilon = interval / 100000;
     if (minIncluded && !firstPositionOverlapsWithMin) {
