@@ -169,6 +169,7 @@ abstract class AxisChartPainter<D extends AxisChartData>
   void drawRangeAnnotation(CanvasWrapper canvasWrapper, PaintHolder<D> holder) {
     final data = holder.data;
     final viewSize = canvasWrapper.size;
+    List<List<Offset>> rangeAnnotationCoordinates = [];
 
     if (data.rangeAnnotations.verticalRangeAnnotations.isNotEmpty) {
       for (final annotation in data.rangeAnnotations.verticalRangeAnnotations) {
@@ -179,6 +180,7 @@ abstract class AxisChartPainter<D extends AxisChartData>
         );
 
         final rect = Rect.fromPoints(from, to);
+        rangeAnnotationCoordinates.add([from, to]);
 
         _rangeAnnotationPaint.setColorOrGradient(
           annotation.color,
@@ -188,18 +190,20 @@ abstract class AxisChartPainter<D extends AxisChartData>
 
         canvasWrapper.drawRect(rect, _rangeAnnotationPaint);
       }
+      data.verticalRangeAnnotationCallback?.call(rangeAnnotationCoordinates);
     }
 
     if (data.rangeAnnotations.horizontalRangeAnnotations.isNotEmpty) {
-      for (final annotation
-          in data.rangeAnnotations.horizontalRangeAnnotations) {
-        final from = Offset(0, getPixelY(annotation.y1, viewSize, holder));
+      for (var annotation in data.rangeAnnotations.horizontalRangeAnnotations) {
+        List<List<Offset>> rangeAnnotationCoordinates = [];
+        final from = Offset(0.0, getPixelY(annotation.y1, viewSize, holder));
         final to = Offset(
           viewSize.width,
           getPixelY(annotation.y2, viewSize, holder),
         );
 
         final rect = Rect.fromPoints(from, to);
+        rangeAnnotationCoordinates.add([from, to]);
 
         _rangeAnnotationPaint.setColorOrGradient(
           annotation.color,
@@ -210,6 +214,7 @@ abstract class AxisChartPainter<D extends AxisChartData>
         canvasWrapper.drawRect(rect, _rangeAnnotationPaint);
       }
     }
+    data.horizontalRangeAnnotationCallback?.call(rangeAnnotationCoordinates);
   }
 
   void drawExtraLines(

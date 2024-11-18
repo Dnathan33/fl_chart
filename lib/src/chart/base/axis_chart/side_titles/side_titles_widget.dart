@@ -100,11 +100,12 @@ class SideTitlesWidget extends StatelessWidget {
     double axisMax,
     AxisSide side,
   ) {
+    double axisDiff = axisMax - axisMin == 0 ? 1 : axisMax - axisMin;
     List<AxisSideTitleMetaData> axisPositions;
     final interval = sideTitles.interval ??
         Utils().getEfficientInterval(
           axisViewSize,
-          axisMax - axisMin,
+          axisDiff,
         );
     if (isHorizontal && axisChartData is BarChartData) {
       final barChartData = axisChartData as BarChartData;

@@ -50,6 +50,8 @@ class LineChartData extends AxisChartData with EquatableMixin {
     super.gridData = const FlGridData(),
     super.borderData,
     super.rangeAnnotations = const RangeAnnotations(),
+    super.horizontalRangeAnnotationCallback,
+    super.verticalRangeAnnotationCallback,
     double? minX,
     double? maxX,
     super.baselineX,
@@ -103,6 +105,8 @@ class LineChartData extends AxisChartData with EquatableMixin {
         titlesData: FlTitlesData.lerp(a.titlesData, b.titlesData, t),
         rangeAnnotations:
             RangeAnnotations.lerp(a.rangeAnnotations, b.rangeAnnotations, t),
+        horizontalRangeAnnotationCallback: b.horizontalRangeAnnotationCallback,
+        verticalRangeAnnotationCallback: b.verticalRangeAnnotationCallback,
         lineBarsData:
             lerpLineChartBarDataList(a.lineBarsData, b.lineBarsData, t)!,
         betweenBarsData:
@@ -122,6 +126,8 @@ class LineChartData extends AxisChartData with EquatableMixin {
     List<BetweenBarsData>? betweenBarsData,
     FlTitlesData? titlesData,
     RangeAnnotations? rangeAnnotations,
+    RangeAnnotationCallback? horizontalRangeAnnotationCallback,
+    RangeAnnotationCallback? verticalRangeAnnotationCallback,
     ExtraLinesData? extraLinesData,
     LineTouchData? lineTouchData,
     List<ShowingTooltipIndicators>? showingTooltipIndicators,
@@ -145,6 +151,10 @@ class LineChartData extends AxisChartData with EquatableMixin {
         lineTouchData: lineTouchData ?? this.lineTouchData,
         showingTooltipIndicators:
             showingTooltipIndicators ?? this.showingTooltipIndicators,
+        horizontalRangeAnnotationCallback: horizontalRangeAnnotationCallback ??
+          this.horizontalRangeAnnotationCallback,
+        verticalRangeAnnotationCallback: verticalRangeAnnotationCallback ??
+          this.verticalRangeAnnotationCallback,
         gridData: gridData ?? this.gridData,
         borderData: borderData ?? this.borderData,
         minX: minX ?? this.minX,
@@ -169,6 +179,8 @@ class LineChartData extends AxisChartData with EquatableMixin {
         gridData,
         borderData,
         rangeAnnotations,
+        horizontalRangeAnnotationCallback,
+        verticalRangeAnnotationCallback,
         minX,
         maxX,
         baselineX,

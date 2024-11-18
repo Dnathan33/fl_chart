@@ -53,7 +53,7 @@ class AxisChartHelper {
       yield axisSeek;
       axisSeek += interval;
     }
-    if (maxIncluded && !lastPositionOverlapsWithMax) {
+    if (maxIncluded && lastPositionOverlapsWithMax) {
       yield max;
     }
   }

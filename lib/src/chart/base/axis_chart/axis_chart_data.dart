@@ -18,6 +18,8 @@ abstract class AxisChartData extends BaseChartData with EquatableMixin {
     FlGridData? gridData,
     required this.titlesData,
     RangeAnnotations? rangeAnnotations,
+    RangeAnnotationCallback? horizontalRangeAnnotationCallback,
+    RangeAnnotationCallback? verticalRangeAnnotationCallback,
     required this.minX,
     required this.maxX,
     double? baselineX,
@@ -35,10 +37,14 @@ abstract class AxisChartData extends BaseChartData with EquatableMixin {
         baselineY = baselineY ?? 0,
         clipData = clipData ?? const FlClipData.none(),
         backgroundColor = backgroundColor ?? Colors.transparent,
+        horizontalRangeAnnotationCallback = horizontalRangeAnnotationCallback,
+        verticalRangeAnnotationCallback = verticalRangeAnnotationCallback,
         extraLinesData = extraLinesData ?? const ExtraLinesData();
   final FlGridData gridData;
   final FlTitlesData titlesData;
   final RangeAnnotations rangeAnnotations;
+  final RangeAnnotationCallback? horizontalRangeAnnotationCallback;
+  final RangeAnnotationCallback? verticalRangeAnnotationCallback;
 
   double minX;
   double maxX;
@@ -68,6 +74,8 @@ abstract class AxisChartData extends BaseChartData with EquatableMixin {
         gridData,
         titlesData,
         rangeAnnotations,
+        horizontalRangeAnnotationCallback,
+        verticalRangeAnnotationCallback,
         minX,
         maxX,
         baselineX,
@@ -1607,3 +1615,6 @@ class FlDotCrossPainter extends FlDotPainter {
         width,
       ];
 }
+
+/// A callback function that retrieves the list of annotation coordinates.
+typedef RangeAnnotationCallback = void Function(List<List<Offset>>);

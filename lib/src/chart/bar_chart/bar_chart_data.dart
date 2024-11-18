@@ -47,6 +47,8 @@ class BarChartData extends AxisChartData with EquatableMixin {
     RangeAnnotations? rangeAnnotations,
     super.backgroundColor,
     ExtraLinesData? extraLinesData,
+    RangeAnnotationCallback? horizontalRangeAnnotationCallback,
+    RangeAnnotationCallback? verticalRangeAnnotationCallback,
   })  : barGroups = barGroups ?? const [],
         groupsSpace = groupsSpace ?? 16,
         alignment = alignment ?? BarChartAlignment.spaceEvenly,
@@ -58,6 +60,8 @@ class BarChartData extends AxisChartData with EquatableMixin {
               ),
           gridData: gridData ?? const FlGridData(),
           rangeAnnotations: rangeAnnotations ?? const RangeAnnotations(),
+          horizontalRangeAnnotationCallback: horizontalRangeAnnotationCallback,
+          verticalRangeAnnotationCallback: verticalRangeAnnotationCallback,
           touchData: barTouchData ?? BarTouchData(),
           extraLinesData: extraLinesData ?? const ExtraLinesData(),
           minX: 0,
@@ -86,6 +90,8 @@ class BarChartData extends AxisChartData with EquatableMixin {
     BarChartAlignment? alignment,
     FlTitlesData? titlesData,
     RangeAnnotations? rangeAnnotations,
+    RangeAnnotationCallback? horizontalRangeAnnotationCallback,
+    RangeAnnotationCallback? verticalRangeAnnotationCallback,
     BarTouchData? barTouchData,
     FlGridData? gridData,
     FlBorderData? borderData,
@@ -109,6 +115,10 @@ class BarChartData extends AxisChartData with EquatableMixin {
         baselineY: baselineY ?? this.baselineY,
         backgroundColor: backgroundColor ?? this.backgroundColor,
         extraLinesData: extraLinesData ?? this.extraLinesData,
+        horizontalRangeAnnotationCallback: horizontalRangeAnnotationCallback ??
+            this.horizontalRangeAnnotationCallback,
+        verticalRangeAnnotationCallback: verticalRangeAnnotationCallback ??
+            this.verticalRangeAnnotationCallback,
       );
 
   /// Lerps a [BaseChartData] based on [t] value, check [Tween.lerp].
@@ -122,6 +132,8 @@ class BarChartData extends AxisChartData with EquatableMixin {
         titlesData: FlTitlesData.lerp(a.titlesData, b.titlesData, t),
         rangeAnnotations:
             RangeAnnotations.lerp(a.rangeAnnotations, b.rangeAnnotations, t),
+        horizontalRangeAnnotationCallback: b.horizontalRangeAnnotationCallback,
+        verticalRangeAnnotationCallback: b.verticalRangeAnnotationCallback,
         barTouchData: b.barTouchData,
         gridData: FlGridData.lerp(a.gridData, b.gridData, t),
         borderData: FlBorderData.lerp(a.borderData, b.borderData, t),
@@ -151,6 +163,8 @@ class BarChartData extends AxisChartData with EquatableMixin {
         gridData,
         borderData,
         rangeAnnotations,
+        horizontalRangeAnnotationCallback,
+        verticalRangeAnnotationCallback,
         backgroundColor,
         extraLinesData,
       ];
